@@ -2,9 +2,10 @@ const request = require("supertest");
 const { User } = require("../../models/user");
 const { Genres } = require("../../models/genre");
 
-describe("auth middleware", () => {
-  let server;
+let server;
+let token;
 
+describe("auth middleware", () => {
   beforeEach(() => {
     server = require("../../app");
   });
@@ -12,8 +13,6 @@ describe("auth middleware", () => {
     await server.close();
     await Genres.deleteOne();
   });
-
-  let token;
 
   const exec = function () {
     return request(server)
